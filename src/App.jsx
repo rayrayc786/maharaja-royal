@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useLenis } from './hooks/useLenis';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
 import { PageLoader } from './components/PageLoader/PageLoader';
+import { ScrollToTop } from './components/ScrollToTop/ScrollToTop';
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { Home } from './pages/Home/Home';
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <CustomCursor />
       
       {loading ? (
@@ -30,7 +32,7 @@ function App() {
           
           <main>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home onReserve={() => setIsModalOpen(true)} />} />
               <Route path="/menus" element={<Menus />} />
               <Route path="/desserts" element={<DessertBoutique />} />
               <Route path="/our-story" element={<OurStory />} />

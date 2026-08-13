@@ -1,7 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { scrollToSection } from '../../utils/scroll';
 
 export const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  const handleNavClick = (sectionId) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => scrollToSection(sectionId), 100);
+    } else {
+      scrollToSection(sectionId);
+    }
+  };
+
   return (
     <footer className="bg-cream pt-24 pb-8 px-6 md:px-12 lg:px-24 border-t border-royal-blue/10">
       <div className="max-w-[1600px] mx-auto">
@@ -27,11 +40,11 @@ export const Footer = () => {
           <div className="flex flex-col gap-6 lg:pl-12">
             <h4 className="font-serif text-lg text-royal-blue font-medium mb-2">Navigation</h4>
             <div className="flex flex-col gap-4 font-sans font-light text-sm">
-              <Link to="/" className="hover:text-gold transition-colors w-fit">Home</Link>
-              <Link to="/menus" className="hover:text-gold transition-colors w-fit">Menu</Link>
-              <Link to="/desserts" className="hover:text-gold transition-colors w-fit">Desserts</Link>
-              <Link to="/privacy" className="hover:text-gold transition-colors w-fit">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-gold transition-colors w-fit">Terms & Condition</Link>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-gold transition-colors w-fit text-left">Home</button>
+              <button onClick={() => handleNavClick('menus')} className="hover:text-gold transition-colors w-fit text-left">Menu</button>
+              <button onClick={() => handleNavClick('desserts')} className="hover:text-gold transition-colors w-fit text-left">Desserts</button>
+              <Link to="/privacy" className="hover:text-gold transition-colors w-fit text-left">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-gold transition-colors w-fit text-left">Terms & Condition</Link>
             </div>
           </div>
 
