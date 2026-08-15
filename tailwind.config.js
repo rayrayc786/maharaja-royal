@@ -17,8 +17,8 @@ export default {
         'text-light': '#E9E2D6',
       },
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        serif: ['Cormorant Garamond', 'serif'],
+        sans: ['Outfit', 'sans-serif'],
       },
       spacing: {
         '18': '4.5rem',
