@@ -31,7 +31,7 @@ export const Header = ({ onReserve }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // For Home, header becomes fixed when it reaches the top of the viewport
+      // Header becomes fixed when scroll reaches 100vh (bottom of hero)
       const bgThreshold = isHome ? window.innerHeight : 0;
       
       if (window.scrollY >= bgThreshold) {
@@ -39,6 +39,7 @@ export const Header = ({ onReserve }) => {
       } else {
         setIsScrolled(false);
       }
+
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -50,7 +51,7 @@ export const Header = ({ onReserve }) => {
   }, [isHome]);
 
   // Determine header classes based on page and scroll position
-  let headerClasses = "w-full z-[100] transition-colors duration-300 py-4 px-6 md:py-5 md:px-12 lg:px-24 border-b border-transparent bg-royal-gradient text-cream ";
+  let headerClasses = "w-full z-[100] transition-[background-color,border-color,padding,box-shadow] duration-500 py-4 px-6 md:py-5 md:px-12 lg:px-24 border-b border-transparent bg-royal-gradient text-cream ";
   
   if (isHome) {
     if (isScrolled) {
@@ -64,6 +65,8 @@ export const Header = ({ onReserve }) => {
     // Other pages -> always fixed
     headerClasses += "fixed top-0 left-0";
   }
+
+  // const showHeaderLogo = !isHome || logoVisible;
 
   return (
     <header 
@@ -94,7 +97,7 @@ export const Header = ({ onReserve }) => {
           <Link 
             to="/" 
             ref={logoRef} 
-            className="flex flex-col items-center group drop-shadow-lg transition-opacity duration-500 opacity-100 pointer-events-auto"
+            className={`header-logo-container flex flex-col items-center group drop-shadow-lg pointer-events-auto ${isHome ? 'opacity-0' : 'opacity-100'}`}
           >
              <span className="font-serif text-2xl md:text-3xl tracking-[0.2em] logo-title drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">MAHARAJA</span>
              <span className="text-[0.55rem] uppercase tracking-[0.3em] mt-1 font-sans logo-subtitle text-gold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">Royal Bites</span>
