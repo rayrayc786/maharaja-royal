@@ -22,7 +22,7 @@ export const ReservationModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" ref={modalRef} style={{ visibility: 'hidden', opacity: 0 }}>
       {/* Overlay */}
-      <div className="absolute inset-0 bg-royal-blue/95 backdrop-blur-md" onClick={onClose}></div>
+      <div className="absolute inset-0 bg-royal-gradient opacity-95 backdrop-blur-md" onClick={onClose}></div>
       
       {/* Content Container */}
       <div 
@@ -88,7 +88,7 @@ export const ReservationModal = ({ isOpen, onClose }) => {
               <textarea placeholder="Special Requests (Allergies, Occasion, etc.)" className="w-full pb-2 pt-2 border-b border-royal-blue/20 bg-transparent font-sans text-sm text-royal-blue placeholder:text-royal-blue/40 outline-none focus:border-gold transition-colors min-h-[60px] resize-y"></textarea>
             </div>
             
-            <button type="submit" className="w-full py-4 bg-royal-blue text-cream uppercase text-[0.75rem] font-medium tracking-[0.2em] mt-8 transition-all duration-500 hover:bg-gold hover:text-royal-blue shadow-lg hover:shadow-xl group relative overflow-hidden">
+            <button type="submit" className="w-full py-4 bg-royal-gradient text-cream uppercase text-[0.75rem] font-medium tracking-[0.2em] mt-8 transition-all duration-500 hover:bg-gold hover:text-royal-blue shadow-lg hover:shadow-xl group relative overflow-hidden">
               <span className="relative z-10">Confirm Reservation</span>
             </button>
           </form>

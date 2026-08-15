@@ -73,18 +73,29 @@ export const Home = ({ onReserve }) => {
         <div className="absolute inset-0 bg-gold-texture opacity-100 pointer-events-none"></div>
         
         <div className="max-w-[900px] relative z-10 flex flex-col items-center">
-          <SplitTextReveal className="font-serif text-[clamp(2.5rem,5vw,5rem)] leading-[1.1] text-royal-blue mb-8" text="Welcome to Maharaja Royal" />
+          <SplitTextReveal className="font-serif text-[clamp(2.5rem,5vw,5rem)] leading-[1.1] text-royal-blue mb-8" text="Welcome to \n Maharaja_Royal_Bites" />
           <h3 className="font-sans text-[clamp(1rem,2vw,1.5rem)] font-light text-royal-blue/80 mb-12 max-w-[700px] gsap-fade-up">
             The Modern Royal Indian Cuisine in the Heart of Reno
           </h3>
-          <button onClick={() => scrollToSection('our-story')} className="gsap-fade-up inline-block px-10 py-4 bg-gold text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-500 hover:bg-royal-blue hover:text-cream shadow-lg hover:shadow-xl">
+          <button onClick={() => scrollToSection('our-story')} className="gsap-fade-up inline-block px-10 py-4 bg-gold text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-500 hover:bg-royal-gradient hover:text-cream shadow-lg hover:shadow-xl">
             Our Story
           </button>
         </div>
       </section>
 
       {/* ===== BANNER SECTION ===== */}
-      <section className="relative bg-royal-blue py-32 px-6 md:py-48 md:px-12 lg:py-[180px] lg:px-24 text-cream flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative bg-royal-gradient py-32 px-6 md:py-48 md:px-12 lg:py-[180px] lg:px-24 text-cream flex flex-col items-center justify-center text-center overflow-hidden">
+        {/* Repeating Mandala Texture — banner section only */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: 'url(/mandala-tile.png)',
+            backgroundSize: '130px 130px',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'screen',
+            opacity: 0.18,
+          }}
+        />
         <div className="max-w-[800px] relative z-10 flex flex-col items-center">
            <SplitTextReveal className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] mb-8" text="Experience the Grandeur" />
            <p className="font-sans font-light text-lg md:text-xl text-cream/80 mb-12 gsap-fade-up">
@@ -96,19 +107,18 @@ export const Home = ({ onReserve }) => {
         </div>
         
         {/* Subtle decorative dishes - styled like Novikov's floating elements */}
-        <div className="absolute -top-[10%] -left-[5%] w-[300px] h-[300px] rounded-full overflow-hidden border-[6px] border-cream/10 opacity-60 gsap-parallax hidden lg:block">
+        <div className="absolute -top-[10%] -left-[5%] w-[300px] h-[300px] rounded-full overflow-hidden border-[6px] border-cream/20 gsap-parallax hidden lg:block z-20">
            <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover scale-110" alt="Decor 1"/>
         </div>
-        <div className="absolute -bottom-[10%] -right-[5%] w-[350px] h-[350px] rounded-full overflow-hidden border-[6px] border-cream/10 opacity-60 gsap-parallax hidden lg:block">
+        <div className="absolute -bottom-[10%] -right-[5%] w-[350px] h-[350px] rounded-full overflow-hidden border-[6px] border-cream/20 gsap-parallax hidden lg:block z-20">
            <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover scale-110" alt="Decor 2"/>
         </div>
       </section>
 
       {/* ===== EDITORIAL MENU SECTIONS ===== */}
-      <section id="menus" className="bg-cream pt-20 pb-32 lg:pt-32 lg:pb-48">
-        <div className="max-w-[1600px] mx-auto flex flex-col gap-32 lg:gap-48 px-6 md:px-12 lg:px-24">
-          
-          {/* Menu 1: Breakfast */}
+      {/* Menu 1: Breakfast (Cream) */}
+      <section id="menus" className="bg-cream pt-20 pb-16 lg:pt-32 lg:pb-24">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
           <div id="breakfast" className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
             <div className="flex-1 w-full order-2 lg:order-1 pr-0 lg:pr-12">
               <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-royal-blue mb-8" text="Our Breakfast Treats" />
@@ -116,7 +126,7 @@ export const Home = ({ onReserve }) => {
                 The breakfast menu offers a dish for every appetite and mood, from flaky, oven-fresh viennoiseries to elegant fruit bowls and decadent, caviar-laden eggs.
               </p>
               <div className="gsap-fade-up">
-                <button onClick={() => scrollToSection('breakfast')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-blue">
+                <button onClick={() => scrollToSection('breakfast')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-gradient">
                   Breakfast Menu
                 </button>
               </div>
@@ -127,8 +137,23 @@ export const Home = ({ onReserve }) => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Menu 2: Lunch & Dinner */}
+      {/* Menu 2: Lunch & Dinner (Royal Gradient with Gold Mandala Pattern) */}
+      <section className="bg-royal-gradient relative py-20 lg:py-32 overflow-hidden text-cream">
+        {/* Subtle Mandala Texture Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: 'url(/mandala-tile.png)',
+            backgroundSize: '220px 220px',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'screen',
+            opacity: 0.18,
+          }}
+        />
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
           <div id="lunch-dinner" className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
              <div className="flex-1 w-full order-1 lg:order-1">
               <div className="aspect-[4/3] lg:aspect-square overflow-hidden rounded-sm">
@@ -136,19 +161,23 @@ export const Home = ({ onReserve }) => {
               </div>
             </div>
             <div className="flex-1 w-full order-2 lg:order-2 pl-0 lg:pl-12">
-              <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-royal-blue mb-8" text="Lunch & Dinner" />
-              <p className="font-sans font-light text-lg md:text-xl text-text-dark/80 mb-10 leading-relaxed gsap-fade-up">
+              <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-cream mb-8" text="Lunch & Dinner" />
+              <p className="font-sans font-light text-lg md:text-xl text-cream/80 mb-10 leading-relaxed gsap-fade-up">
                 During lunch and dinner service, patrons embark on an extraordinary culinary voyage while dining à la carte. The menu showcases hearty-meets-elegant dishes executed with the restaurant's signature flair.
               </p>
               <div className="gsap-fade-up">
-                <button onClick={() => scrollToSection('lunch-dinner')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-blue">
+                <button onClick={() => scrollToSection('lunch-dinner')} className="inline-block px-8 py-4 bg-cream text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-gold hover:text-royal-blue">
                   Lunch & Dinner Menu
                 </button>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Menu 3: Desserts */}
+      {/* Menu 3: Desserts (Cream) */}
+      <section className="bg-cream pt-20 pb-32 lg:pt-32 lg:pb-48">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
           <div id="desserts" className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
             <div className="flex-1 w-full order-2 lg:order-1 pr-0 lg:pr-12">
               <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-royal-blue mb-8" text="Beverages & Desserts" />
@@ -156,7 +185,7 @@ export const Home = ({ onReserve }) => {
                 Maharaja boasts an array of beverages & desserts, spanning from expertly crafted specialty coffees, teas, Patisserie to thoughtfully curated smoothies, gateaux and mocktails.
               </p>
               <div className="gsap-fade-up">
-                <button onClick={() => scrollToSection('desserts')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-blue">
+                <button onClick={() => scrollToSection('desserts')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-gradient">
                   Desserts Menu
                 </button>
               </div>
@@ -167,32 +196,42 @@ export const Home = ({ onReserve }) => {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
       {/* ===== ROYAL COLLECTION CAROUSEL ===== */}
-      <section className="bg-cream py-20 lg:py-32 overflow-hidden border-t border-royal-blue/10">
-        <div className="px-6 md:px-12 lg:px-24 mb-12 flex flex-col md:flex-row md:justify-between md:items-end gap-6">
+      <section className="bg-royal-gradient relative py-20 lg:py-32 overflow-hidden border-t border-cream/10 text-cream">
+        {/* Subtle Mandala Texture Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            backgroundImage: 'url(/mandala-tile.png)',
+            backgroundSize: '220px 220px',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'screen',
+            opacity: 0.18,
+          }}
+        />
+        <div className="px-6 md:px-12 lg:px-24 mb-12 flex flex-col md:flex-row md:justify-between md:items-end gap-6 relative z-10">
           <div className="max-w-2xl">
-            <span className="text-[0.65rem] uppercase tracking-[0.2em] text-royal-blue/70 mb-4 block">SIGNATURE BOUTIQUE</span>
-            <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-[1.1] text-royal-blue mb-4" text="Maharaja's Royal Collection" />
-            <p className="font-sans font-light text-lg text-royal-blue/80 gsap-fade-up">
+            <span className="text-[0.65rem] uppercase tracking-[0.2em] text-gold mb-4 block">SIGNATURE BOUTIQUE</span>
+            <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-[1.1] text-cream mb-4" text="Maharaja's Royal Collection" />
+            <p className="font-sans font-light text-lg text-cream/80 gsap-fade-up">
               Our boutique showcases an exquisite selection of handcrafted delicacies and a symphony of flavors.
             </p>
           </div>
           <div className="flex gap-4 gsap-fade-up">
-            <button onClick={() => scrollCarousel('left')} className="w-12 h-12 rounded-full border border-royal-blue/20 flex items-center justify-center text-royal-blue hover:bg-[#b58b45] hover:border-[#b58b45] hover:text-white transition-all">
+            <button onClick={() => scrollCarousel('left')} className="w-12 h-12 rounded-full border border-cream/20 flex items-center justify-center text-cream hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
               ←
             </button>
-            <button onClick={() => scrollCarousel('right')} className="w-12 h-12 rounded-full border border-royal-blue/20 flex items-center justify-center text-royal-blue hover:bg-[#b58b45] hover:border-[#b58b45] hover:text-white transition-all">
+            <button onClick={() => scrollCarousel('right')} className="w-12 h-12 rounded-full border border-cream/20 flex items-center justify-center text-cream hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
               →
             </button>
           </div>
         </div>
 
         {/* Carousel Container */}
-        <div ref={carouselRef} className="pl-6 md:pl-12 lg:pl-24 flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide">
+        <div ref={carouselRef} className="pl-6 md:pl-12 lg:pl-24 flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide relative z-10">
           {[
             "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=600&auto=format&fit=crop",
             "https://images.unsplash.com/photo-1603532648955-039310d9ed75?q=80&w=600&auto=format&fit=crop",
@@ -242,7 +281,7 @@ export const Home = ({ onReserve }) => {
             Experience the culinary heritage of the Indian royal courts.
             Every spice carefully selected, every dish crafted with absolute devotion.
           </p>
-          <button onClick={onReserve} className="gsap-fade-up inline-block px-10 py-4 bg-gold text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-500 hover:bg-royal-blue hover:text-cream shadow-lg hover:shadow-xl">
+          <button onClick={onReserve} className="gsap-fade-up inline-block px-10 py-4 bg-gold text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-500 hover:bg-royal-gradient hover:text-cream shadow-lg hover:shadow-xl">
             Book Your Royal Table
           </button>
         </div>

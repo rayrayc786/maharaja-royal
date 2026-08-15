@@ -30,7 +30,7 @@ export const PageLoader = ({ onComplete }) => {
   }, [progress, onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-dark flex items-center justify-center" ref={loaderRef}>
+    <div className="fixed inset-0 z-[9999] bg-royal-gradient flex items-center justify-center" ref={loaderRef}>
       <div className="text-center text-cream">
         <h1 className="heading-large mb-8 md:mb-16" ref={logoRef}>
           <span className="text-gold">MAHARAJA</span><br/>

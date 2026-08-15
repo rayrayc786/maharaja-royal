@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const Hero = () => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const logoRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -27,6 +28,19 @@ export const Hero = () => {
         start: "top top",
         end: "bottom top",
         scrub: true,
+      }
+    });
+
+    // Logo Animate Downward & Fade
+    gsap.to(logoRef.current, {
+      y: 150,
+      opacity: 0,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "50% top", // Fades out completely by the time they scroll halfway down the hero
+        scrub: 1,
       }
     });
 
@@ -56,7 +70,11 @@ export const Hero = () => {
       {/* Content */}
       <div className="relative z-[2] h-full flex flex-col items-center justify-center text-center px-4">
 
-        
+        {/* Hero Logo */}
+        <div className="flex flex-col items-center group drop-shadow-lg" ref={logoRef}>
+           <span className="font-serif text-[clamp(3rem,8vw,6rem)] tracking-[0.2em] drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] text-white">MAHARAJA</span>
+           <span className="text-[clamp(0.7rem,2vw,1.2rem)] uppercase tracking-[0.4em] mt-2 font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] text-gold">Royal Bites</span>
+        </div>
         {/* Scroll Indicator */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6">
           <span className="text-[0.65rem] uppercase tracking-[0.2em] text-cream/70">Scroll to Explore</span>

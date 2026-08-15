@@ -16,11 +16,16 @@ export const SplitTextReveal = ({ text, className = '' }) => {
   }, [text]);
 
   // Very basic word splitting since we don't have SplitText
-  const words = text.split(' ').map((word, i) => (
-    <span key={i} style={{ display: 'inline-block', overflow: 'hidden', paddingRight: '0.25em' }}>
-      <span className="word" style={{ display: 'inline-block' }}>{word}</span>
-    </span>
-  ));
+  const words = text.split(' ').map((word, i) => {
+    if (word === '\\n') {
+      return <br key={i} />;
+    }
+    return (
+      <span key={i} style={{ display: 'inline-block', overflow: 'hidden', paddingRight: '0.25em' }}>
+        <span className="word" style={{ display: 'inline-block' }}>{word.replace(/_/g, ' ')}</span>
+      </span>
+    );
+  });
 
   return (
     <div ref={containerRef} className={className}>
