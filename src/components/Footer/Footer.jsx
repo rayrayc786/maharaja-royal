@@ -1,6 +1,7 @@
-import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { scrollToSection } from '../../utils/scroll';
+import logoImg from '../../assets/Maharaja-logo.png';
+
 
 export const Footer = () => {
   const location = useLocation();
@@ -23,8 +24,7 @@ export const Footer = () => {
           {/* Column 1: Logo & Brand */}
           <div className="flex flex-col gap-6">
             <Link to="/" className="flex flex-row items-baseline gap-2 group w-fit">
-              <span className="font-serif text-3xl tracking-[0.1em] text-cream group-hover:text-gold transition-colors duration-500">MAHARAJA</span>
-              <span className="text-[1.5rem] font-serif italic tracking-[0.05em] text-gold group-hover:text-cream transition-colors duration-500 whitespace-nowrap">Royal Bites</span>
+              <img src={logoImg} alt="Maharaja Royal Bites Logo" className="h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
             </Link>
             <p className="font-sans font-light text-sm leading-relaxed text-cream/80 mt-4 max-w-[280px]">
               Whether it's an intimate dinner, a celebration, or a spontaneous craving for great food, let us ensure your visit is nothing short of extraordinary.

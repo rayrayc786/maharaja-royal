@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import logoImg from '../../assets/Maharaja-logo.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
@@ -67,11 +69,10 @@ export const Hero = () => {
         },
         scale: () => {
           const headerLogo = document.querySelector('.header-logo-container');
-          if (!headerLogo) return 0.35;
+          if (!headerLogo) return 0.15;
           const heroRect = heroLogo.getBoundingClientRect();
           const headerRect = headerLogo.getBoundingClientRect();
-          const actualHeaderWidth = headerRect.width * 2;
-          return actualHeaderWidth / heroRect.width;
+          return headerRect.width / heroRect.width;
         },
         ease: "power1.out",
         duration: 0.35
@@ -112,8 +113,7 @@ export const Hero = () => {
 
       {/* Hero Logo (Absolute position, escapes stacking context, moves downward to meet header) */}
       <div className="absolute z-[110] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none flex flex-col items-center group drop-shadow-lg" ref={logoRef}>
-         <span className="font-serif text-[clamp(3rem,8vw,6rem)] tracking-[0.2em] drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] text-white">MAHARAJA</span>
-         <span className="text-[clamp(0.7rem,2vw,1.2rem)] uppercase tracking-[0.4em] mt-2 font-sans drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] text-gold font-medium">Royal Bites</span>
+         <img src={logoImg} alt="Maharaja Royal Bites Logo" className="w-[clamp(12rem,35vw,25rem)] h-auto object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" />
       </div>
 
       {/* Content */}

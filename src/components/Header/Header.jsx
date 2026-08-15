@@ -4,6 +4,8 @@ import { scrollToSection } from '../../utils/scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import logoImg from '../../assets/Maharaja-logo.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export const Header = ({ onReserve }) => {
@@ -99,8 +101,7 @@ export const Header = ({ onReserve }) => {
             ref={logoRef} 
             className={`header-logo-container flex flex-col items-center group drop-shadow-lg pointer-events-auto ${isHome ? 'opacity-0' : 'opacity-100'}`}
           >
-             <span className="font-serif text-2xl md:text-3xl tracking-[0.2em] logo-title drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">MAHARAJA</span>
-             <span className="text-[0.55rem] uppercase tracking-[0.3em] mt-1 font-sans logo-subtitle text-gold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">Royal Bites</span>
+             <img src={logoImg} alt="Maharaja Royal Bites Logo" className="h-16 md:h-20 w-auto object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]" />
           </Link>
         </div>
 
