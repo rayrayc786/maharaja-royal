@@ -140,19 +140,13 @@ export const Home = ({ onReserve }) => {
         </div>
       </section>
 
-      {/* Menu 2: Lunch & Dinner (Royal Gradient with Gold Mandala Pattern) */}
-      <section className="bg-royal-gradient relative py-20 lg:py-32 overflow-hidden text-cream">
-        {/* Subtle Mandala Texture Overlay */}
-        <div 
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{
-            backgroundImage: 'url(/mandala-tile.png)',
-            backgroundSize: '220px 220px',
-            backgroundRepeat: 'repeat',
-            mixBlendMode: 'screen',
-            opacity: 0.18,
-          }}
-        />
+
+
+      {/* Menu 2: Lunch & Dinner (Cream background to match rest of website) */}
+      <section className="bg-cream relative py-20 lg:py-32 overflow-hidden text-royal-blue">
+        {/* Subtle gold diamond background pattern */}
+        <div className="absolute inset-0 bg-gold-texture opacity-100 pointer-events-none" />
+        
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
           <div id="lunch-dinner" className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
              <div className="flex-1 w-full order-1 lg:order-1">
@@ -161,12 +155,12 @@ export const Home = ({ onReserve }) => {
               </div>
             </div>
             <div className="flex-1 w-full order-2 lg:order-2 pl-0 lg:pl-12">
-              <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-cream mb-8" text="Lunch & Dinner" />
-              <p className="font-sans font-light text-lg md:text-xl text-cream/80 mb-10 leading-relaxed gsap-fade-up">
+              <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.1] text-royal-blue mb-8" text="Lunch & Dinner" />
+              <p className="font-sans font-light text-lg md:text-xl text-text-dark/80 mb-10 leading-relaxed gsap-fade-up">
                 During lunch and dinner service, patrons embark on an extraordinary culinary voyage while dining à la carte. The menu showcases hearty-meets-elegant dishes executed with the restaurant's signature flair.
               </p>
               <div className="gsap-fade-up">
-                <button onClick={() => scrollToSection('lunch-dinner')} className="inline-block px-8 py-4 bg-cream text-royal-blue uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-gold hover:text-royal-blue">
+                <button onClick={() => scrollToSection('lunch-dinner')} className="inline-block px-8 py-4 bg-[#b58b45] text-cream uppercase text-[0.8rem] tracking-[0.15em] font-medium rounded-full transition-all duration-300 hover:bg-royal-gradient">
                   Lunch & Dinner Menu
                 </button>
               </div>
@@ -175,7 +169,6 @@ export const Home = ({ onReserve }) => {
         </div>
       </section>
 
-      {/* Menu 3: Desserts (Cream) */}
       <section className="bg-cream pt-20 pb-32 lg:pt-32 lg:pb-48">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
           <div id="desserts" className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
@@ -200,37 +193,27 @@ export const Home = ({ onReserve }) => {
       </section>
 
       {/* ===== ROYAL COLLECTION CAROUSEL ===== */}
-      <section className="bg-royal-gradient relative py-20 lg:py-32 overflow-hidden border-t border-cream/10 text-cream">
-        {/* Subtle Mandala Texture Overlay */}
-        <div 
-          className="absolute inset-0 pointer-events-none z-[1]"
-          style={{
-            backgroundImage: 'url(/mandala-tile.png)',
-            backgroundSize: '220px 220px',
-            backgroundRepeat: 'repeat',
-            mixBlendMode: 'screen',
-            opacity: 0.18,
-          }}
-        />
+      <section className="bg-cream relative py-20 lg:py-32 overflow-hidden border-t border-gold/10 text-royal-blue">
+        {/* Subtle gold diamond background pattern */}
+        <div className="absolute inset-0 bg-gold-texture opacity-100 pointer-events-none" />
+        
         <div className="px-6 md:px-12 lg:px-24 mb-12 flex flex-col md:flex-row md:justify-between md:items-end gap-6 relative z-10">
           <div className="max-w-2xl">
-            <span className="text-[0.65rem] uppercase tracking-[0.2em] text-gold mb-4 block">SIGNATURE BOUTIQUE</span>
-            <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-[1.1] text-cream mb-4" text="Maharaja's Royal Collection" />
-            <p className="font-sans font-light text-lg text-cream/80 gsap-fade-up">
+            <span className="text-[0.65rem] uppercase tracking-[0.2em] text-royal-blue/70 mb-4 block">SIGNATURE BOUTIQUE</span>
+            <SplitTextReveal className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] leading-[1.1] text-royal-blue mb-4" text="Maharaja's Royal Collection" />
+            <p className="font-sans font-light text-lg text-text-dark/80 gsap-fade-up">
               Our boutique showcases an exquisite selection of handcrafted delicacies and a symphony of flavors.
             </p>
           </div>
           <div className="flex gap-4 gsap-fade-up">
-            <button onClick={() => scrollCarousel('left')} className="w-12 h-12 rounded-full border border-cream/20 flex items-center justify-center text-cream hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
+            <button onClick={() => scrollCarousel('left')} className="w-12 h-12 rounded-full border border-royal-blue/20 flex items-center justify-center text-royal-blue hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
               ←
             </button>
-            <button onClick={() => scrollCarousel('right')} className="w-12 h-12 rounded-full border border-cream/20 flex items-center justify-center text-cream hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
+            <button onClick={() => scrollCarousel('right')} className="w-12 h-12 rounded-full border border-royal-blue/20 flex items-center justify-center text-royal-blue hover:bg-gold hover:border-gold hover:text-royal-blue transition-all">
               →
             </button>
           </div>
         </div>
-
-        {/* Carousel Container */}
         <div ref={carouselRef} className="pl-6 md:pl-12 lg:pl-24 flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide relative z-10">
           {[
             "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=600&auto=format&fit=crop",

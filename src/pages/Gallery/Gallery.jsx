@@ -4,12 +4,10 @@ import { SplitTextReveal } from '../../components/SplitTextReveal/SplitTextRevea
 import gsap from 'gsap';
 
 export const Gallery = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('dishes');
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const filteredImages = activeFilter === 'all' 
-    ? galleryData 
-    : galleryData.filter(item => item.category === activeFilter);
+  const filteredImages = galleryData.filter(item => item.category === activeFilter);
 
   useEffect(() => {
     // Animate grid entries when filter changes
@@ -46,7 +44,6 @@ export const Gallery = () => {
       {/* Filter Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-16 max-w-[800px] mx-auto">
         {[
-          { id: 'all', label: 'All Showcase' },
           { id: 'dishes', label: 'Signature Dishes' },
           { id: 'desserts-drinks', label: 'Desserts & Drinks' },
           { id: 'ambience', label: 'Ambience & Interior' }

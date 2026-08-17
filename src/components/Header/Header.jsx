@@ -139,8 +139,8 @@ export const Header = ({ onReserve }) => {
             Menus
           </button>
 
-          <button
-            onClick={() => handleNavClick('desserts')}
+          <Link
+            to="/our-story"
             className="
               text-[0.8rem] uppercase tracking-[0.15em] relative
               after:content-[''] after:absolute after:bottom-[-6px] after:left-0
@@ -148,9 +148,8 @@ export const Header = ({ onReserve }) => {
               hover:after:w-full hover:text-gold transition-colors
             "
           >
-            Desserts
-          </button>
-
+            Our Story
+          </Link>
         </div>
 
         {/* =====================================================
@@ -192,18 +191,6 @@ export const Header = ({ onReserve }) => {
         <div className="hidden md:flex flex-1 gap-10 items-center justify-end">
 
           <Link
-            to="/our-story"
-            className="
-              text-[0.8rem] uppercase tracking-[0.15em] relative
-              after:content-[''] after:absolute after:bottom-[-6px] after:left-0
-              after:w-0 after:h-[1px] after:bg-gold after:transition-all after:duration-300
-              hover:after:w-full hover:text-gold transition-colors
-            "
-          >
-            Our Story
-          </Link>
-
-          <Link
             to="/blog"
             className="
               text-[0.8rem] uppercase tracking-[0.15em] relative
@@ -236,7 +223,7 @@ export const Header = ({ onReserve }) => {
               bg-cream text-royal-blue hover:bg-gold hover:text-royal-blue
             "
           >
-            Reserve a Table
+            Order Online
           </button>
 
         </div>
@@ -279,13 +266,6 @@ export const Header = ({ onReserve }) => {
           className="font-serif text-4xl text-cream hover:text-gold transition-colors"
         >
           Menus
-        </button>
-
-        <button
-          onClick={() => handleNavClick('desserts')}
-          className="font-serif text-4xl text-cream hover:text-gold transition-colors"
-        >
-          Desserts
         </button>
 
         <Link
