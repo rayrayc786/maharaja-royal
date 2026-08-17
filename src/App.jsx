@@ -12,8 +12,6 @@ import { DessertBoutique } from './pages/Desserts/DessertBoutique';
 import { OurStory } from './pages/OurStory/OurStory';
 import { Blog } from './pages/Blog/Blog';
 import { BlogPost } from './pages/Blog/BlogPost';
-import { BlogBlue } from './pages/Blog/BlogBlue';
-import { BlogPostBlue } from './pages/Blog/BlogPostBlue';
 import { Gallery } from './pages/Gallery/Gallery';
 import { GalleryBlue } from './pages/Gallery/GalleryBlue';
 import { ReservationModal } from './components/ReservationModal/ReservationModal';
@@ -44,8 +42,6 @@ function App() {
               <Route path="/our-story" element={<OurStory />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/blog-1" element={<BlogBlue />} />
-              <Route path="/blog-1/:id" element={<BlogPostBlue />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/gallery-1" element={<GalleryBlue />} />
             </Routes>
