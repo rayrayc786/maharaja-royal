@@ -101,20 +101,20 @@ export const OurStory = () => {
         </div>
       </section>
 
+
       {/* 3. The Kitchen Dynasty / Meet the Chef (Dark Blue Gradient) */}
       <section className="bg-royal-gradient relative py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
-        {/* Subtle Mandala Texture Overlay */}
+        {/* Subtle Mandala Texture Overlay — reduced size and opacity for a softer backdrop */}
         <div 
           className="absolute inset-0 pointer-events-none z-[1]"
           style={{
             backgroundImage: 'url(/mandala-tile.png)',
-            backgroundSize: '220px 220px',
+            backgroundSize: '110px 110px',
             backgroundRepeat: 'repeat',
             mixBlendMode: 'screen',
-            opacity: 0.15,
+            opacity: 0.07,
           }}
         />
-
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
           <div className="lg:col-span-7 pr-0 lg:pr-12">
             <span className="text-[0.7rem] uppercase tracking-[0.25em] text-gold mb-3 block font-bold">The Master Artisan</span>
