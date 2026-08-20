@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const Hero = () => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const overlayRef = useRef(null);
   const logoRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -48,6 +49,8 @@ export const Hero = () => {
 
         gsap.set(headerLogo, { opacity: 0 });
 
+        const overlay = overlayRef.current;
+
         /*
          * ==========================================================
          * VIDEO INTRO
@@ -55,9 +58,15 @@ export const Hero = () => {
          */
 
         gsap.fromTo(
+          [video, overlay],
+          { opacity: 0 },
+          { opacity: 1, duration: 2.5, ease: 'power2.out' }
+        );
+
+        gsap.fromTo(
           video,
-          { scale: 1.1, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 2.5, ease: 'power2.out' }
+          { scale: 1.1 },
+          { scale: 1, duration: 2.5, ease: 'power2.out' }
         );
 
         /*
@@ -93,77 +102,64 @@ export const Hero = () => {
          * ==========================================================
          */
 
-        const heroHeight = hero.offsetHeight; // = window.innerHeight
-
+        const headerRect = headerLogo.getBoundingClientRect();
         const heroRect = heroLogo.getBoundingClientRect();
-        const headerLogoRect = headerLogo.getBoundingClientRect();
 
-        /*
-         * X — align hero logo center to header logo center
-         * (Header is full-width, so X is the same whether fixed or absolute)
-         */
         const heroCenterX = heroRect.left + heroRect.width / 2;
-        const headerLogoCenterX = headerLogoRect.left + headerLogoRect.width / 2;
-        const moveX = headerLogoCenterX - heroCenterX;
+        const heroCenterY = heroRect.top + heroRect.height / 2;
 
-        /*
-         * SCALE — shrink hero logo down to header logo size
-         */
-        const targetScale = headerLogoRect.width / heroRect.width;
+        const headerCenterX = headerRect.left + headerRect.width / 2;
 
-        /*
-         * Y — move hero logo DOWN toward the bottom of the hero section.
-         *
-         * The hero logo moves DOWN (positive Y) while the hero section
-         * scrolls UP. Their combined effect keeps the logo roughly
-         * stationary in the viewport until it reaches the hero bottom.
-         *
-         * Target: hero logo center should be at heroHeight - scaledLogoHeight/2
-         * (bottom edge of hero, so logo bottom aligns with hero bottom = header top)
-         *
-         * Movement = target_center_document - initial_center_viewport
-         */
-        const scaledLogoHeight = heroRect.height * targetScale;
+        // Header's target Y center in the viewport once it reaches the top
+        // (Since the header will snap to fixed top-0)
+        // Note: The header has padding, so we must add the top padding to get the actual logo center!
+        // The header has py-4 (16px) or py-5 (20px). The exact position in the viewport will be headerRect.top + headerRect.height/2.
+        // Wait, since header is currently at top-[100vh], its viewport top is 100vh.
+        // Once it reaches top-0, its viewport top will be 0.
+        // So its final viewport center Y is just its current viewport center Y minus 100vh!
+        // This is mathematically flawless and avoids hardcoding padding.
+        
+        const headerInitialCenterY = headerRect.top + headerRect.height / 2;
+        const headerFinalCenterY = headerInitialCenterY - window.innerHeight;
 
-        const heroLogoInitialCenterY = heroRect.top + heroRect.height / 2;
-        // Document coordinate of where the logo should end up (hero section bottom)
-        const targetHeroLogoCenterY = heroHeight - scaledLogoHeight / 2;
+        const moveX = headerCenterX - heroCenterX;
+        
+        // We want the hero logo to end up at headerFinalCenterY in the viewport.
+        // But the hero section itself scrolls UP by window.innerHeight.
+        // So we must move the logo DOWN by window.innerHeight to cancel the scroll,
+        // AND THEN move it to the final destination.
+        const moveY = (headerFinalCenterY - heroCenterY) + window.innerHeight;
 
-        const moveY = targetHeroLogoCenterY - heroLogoInitialCenterY;
+        const targetScale = headerRect.width / heroRect.width;
 
-        console.log('=== LOGO HANDOFF ===');
-        console.log('heroHeight:', heroHeight);
-        console.log('heroLogo height:', heroRect.height);
-        console.log('heroLogo center Y (viewport):', heroLogoInitialCenterY);
-        console.log('targetScale:', targetScale);
-        console.log('scaledLogoHeight:', scaledLogoHeight);
-        console.log('targetHeroLogoCenterY (document):', targetHeroLogoCenterY);
-        console.log('moveX:', moveX, ' moveY (positive = down):', moveY);
-        console.log('====================');
-
-        /*
-         * ==========================================================
-         * MASTER LOGO HANDOFF TIMELINE
-         *
-         * This timeline is scrubbed by scroll.
-         * Total scroll range: top-of-hero to bottom-of-hero (100vh).
-         *
-         * Stage 1 (0–50% scroll):
-         *   Hero logo moves DOWN within the hero section.
-         *   Simultaneously the hero section scrolls UP.
-         *   Net effect: hero logo stays near viewport center
-         *   while the header rises from below.
-         *
-         * Stage 2+3 (at ~50% scroll, SIMULTANEOUSLY):
-         *   Hero logo:   opacity 0 (disappears)
-         *   Header logo: opacity 1 (appears)
-         *   No delay between them — they happen at the exact same moment.
-         *
-         * Stage 4 (50–100% scroll):
-         *   Header logo stays visible as header continues rising
-         *   until it reaches the top and becomes fixed.
-         * ==========================================================
-         */
+        console.log("=== INITIAL LOGO MEASUREMENTS ===");
+        console.log("Window Info:", {
+          innerHeight: window.innerHeight,
+          scrollY: window.scrollY,
+        });
+        console.log("Hero Logo Rect:", {
+          top: heroRect.top,
+          height: heroRect.height,
+          bottom: heroRect.bottom,
+          width: heroRect.width,
+        });
+        console.log("Header Logo Rect:", {
+          top: headerRect.top,
+          height: headerRect.height,
+          bottom: headerRect.bottom,
+          width: headerRect.width,
+        });
+        console.log("=== CALCULATED MOVEMENT TARGETS ===");
+        console.log("heroCenterX: ", heroCenterX);
+        console.log("heroCenterY: ", heroCenterY);
+        console.log("headerCenterX: ", headerCenterX);
+        console.log("headerInitialCenterY: ", headerInitialCenterY);
+        console.log("headerFinalCenterY: ", headerFinalCenterY);
+        console.log("moveX (distance to move right): ", moveX);
+        console.log("moveY (distance to move down): ", moveY);
+        console.log("targetScale (how much to shrink): ", targetScale);
+        console.log("===================================");
+        console.log("=================================");
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -172,39 +168,60 @@ export const Hero = () => {
             end: 'bottom top',
             scrub: true,
             invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              // Real-time tracking of both logos during the scroll
+              const currentHeroRect = heroLogo.getBoundingClientRect();
+              const currentHeaderRect = headerLogo.getBoundingClientRect();
+              const heroStyle = window.getComputedStyle(heroLogo);
+              const headerStyle = window.getComputedStyle(headerLogo);
+              
+              console.log(`[Scroll Progress: ${(self.progress * 100).toFixed(1)}%]`, {
+                // Real-time values
+                heroViewportY: currentHeroRect.top.toFixed(2),
+                headerViewportY: currentHeaderRect.top.toFixed(2),
+                distanceBetweenThem: (currentHeaderRect.top - currentHeroRect.bottom).toFixed(2),
+                heroOpacity: heroStyle.opacity,
+                headerOpacity: headerStyle.opacity,
+                heroTransform: heroStyle.transform,
+                
+                // Calculated target values (shown continuously as requested)
+                targetMoveX: moveX,
+                targetMoveY: moveY,
+                targetScale: targetScale,
+                heroCenterX,
+                heroCenterY,
+                headerCenterX,
+                headerInitialCenterY,
+                headerFinalCenterY,
+              });
+            }
           },
         });
 
-        // Stage 1: Hero logo moves DOWN to the hero section's bottom edge
         timeline.to(heroLogo, {
           x: moveX,
-          y: moveY,
+          y: moveY-50,
           scale: targetScale,
-          duration: 0.5,
-          ease: 'power2.inOut',
+          duration: 1,
+          ease: 'none', // Must be 'none' to smoothly glide to the top without bobbing
         });
 
-        // Stage 2: Hero logo disappears instantly
-        timeline.to(heroLogo, {
-          opacity: 0,
-          duration: 0.01,
-          ease: 'none',
-        });
+timeline.to(
+  heroLogo,
+  {
+    opacity: 0,
+    duration: 0.05,
+  }
+);
 
-        // Stage 3: Header logo appears at the SAME TIME as stage 2
-        // '<' means "start at the same position as the previous tween"
-        timeline.to(
-          headerLogo,
-          {
-            opacity: 1,
-            duration: 0.01,
-            ease: 'none',
-          },
-          '<'
-        );
-
-        // Stage 4: Hold state while header continues rising to the top
-        timeline.to({}, { duration: 0.48 });
+timeline.to(
+  headerLogo,
+  {
+    opacity: 1,
+    duration: 0.05,
+  },
+  '<'
+);
       };
 
       // Wait for both logos to be fully loaded before measuring dimensions
@@ -245,7 +262,7 @@ export const Hero = () => {
         w-screen
         h-screen
         overflow-hidden
-        bg-dark
+        bg-royal-gradient
       "
     >
 
@@ -254,8 +271,9 @@ export const Hero = () => {
       ====================================================== */}
 
       <div
+        ref={overlayRef}
         className="
-          absolute inset-0 bg-black/40 z-[1]
+          absolute inset-0 bg-black/40 opacity-0 z-[1]
         "
       />
 
@@ -266,7 +284,7 @@ export const Hero = () => {
       <video
         ref={videoRef}
         className="
-          absolute inset-0 w-full h-full object-cover z-0
+          absolute inset-0 w-full h-full object-cover opacity-0 z-0
         "
         autoPlay
         muted

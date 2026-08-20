@@ -13,7 +13,9 @@
 
   body {
     font-family: 'Outfit', sans-serif;
-    background-color: #0A1930;
+    background-image: linear-gradient(135deg, #0b132a 0%, #153b9e 50%, #0c1a45 100%);
+    background-attachment: fixed;
+    background-color: #0b132a;
     color: #F4F0E8;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
