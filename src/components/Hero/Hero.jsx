@@ -115,14 +115,14 @@ export const Hero = () => {
         // This avoids bugs when user navigates back to Home with a non-zero scroll position
         const absoluteHeroSectionTop = heroSectionRect.top + window.scrollY;
         const targetScrollY = absoluteHeroSectionTop + heroSectionRect.height;
-        
+
         const headerElRect = header.getBoundingClientRect();
         const logoOffsetY = headerRect.top - headerElRect.top;
         const targetViewportCenterY = logoOffsetY + headerRect.height / 2;
-        
+
         const targetAbsoluteCenterY = targetScrollY + targetViewportCenterY;
         const absoluteHeroLogoCenterY = heroLogoRect.top + window.scrollY + heroLogoRect.height / 2;
-        
+
         const moveY = targetAbsoluteCenterY - absoluteHeroLogoCenterY;
 
         const targetScale = headerRect.width / heroLogoRect.width;
@@ -159,7 +159,7 @@ export const Hero = () => {
           scrollTrigger: {
             trigger: hero,
             start: 'top top',
-            end: 'bottom top',
+            end: 'bottom center',
             scrub: true,
             invalidateOnRefresh: true,
             onUpdate: (self) => {
@@ -168,7 +168,7 @@ export const Hero = () => {
               const currentHeaderRect = headerLogo.getBoundingClientRect();
               const heroStyle = window.getComputedStyle(heroLogo);
               const headerStyle = window.getComputedStyle(headerLogo);
-              
+
               console.log(`[Scroll Progress: ${(self.progress * 100).toFixed(1)}%]`, {
                 // Real-time values
                 heroViewportY: currentHeroRect.top.toFixed(2),
@@ -177,7 +177,7 @@ export const Hero = () => {
                 heroOpacity: heroStyle.opacity,
                 headerOpacity: headerStyle.opacity,
                 heroTransform: heroStyle.transform,
-                
+
                 // Calculated target values (shown continuously as requested)
                 targetMoveX: moveX,
                 targetMoveY: moveY,
@@ -193,28 +193,28 @@ export const Hero = () => {
 
         timeline.to(heroLogo, {
           x: moveX,
-          y: moveY-50,
+          y: moveY - 50,
           scale: targetScale,
           duration: 1,
           ease: 'none', // Must be 'none' to smoothly glide to the top without bobbing
         });
 
-timeline.to(
-  heroLogo,
-  {
-    opacity: 0,
-    duration: 0.05,
-  }
-);
+        timeline.to(
+          heroLogo,
+          {
+            opacity: 0,
+            duration: 0.05,
+          }
+        );
 
-timeline.to(
-  headerLogo,
-  {
-    opacity: 1,
-    duration: 0.05,
-  },
-  '<'
-);
+        timeline.to(
+          headerLogo,
+          {
+            opacity: 1,
+            duration: 0.05,
+          },
+          '<'
+        );
       };
 
       // Wait for both logos to be fully loaded before measuring dimensions
