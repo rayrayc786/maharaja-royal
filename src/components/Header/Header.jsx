@@ -78,7 +78,7 @@ export const Header = ({ onReserve }) => {
       headerClasses += ` absolute top-[100vh] left-0`;
     }
   } else {
-    headerClasses += ` fixed top-0 left-0`;
+    headerClasses += ` absolute top-0 left-0`;
   }
 
   return (
@@ -167,6 +167,7 @@ export const Header = ({ onReserve }) => {
         <div className="flex-1 flex justify-center items-center z-50">
 
           <Link
+            key={isHome ? 'home' : 'other'}
             to="/"
             data-header-logo
             className={`

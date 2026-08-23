@@ -103,34 +103,29 @@ export const Hero = () => {
          */
 
         const headerRect = headerLogo.getBoundingClientRect();
-        const heroRect = heroLogo.getBoundingClientRect();
+        const heroLogoRect = heroLogo.getBoundingClientRect();
+        const heroSectionRect = hero.getBoundingClientRect();
 
-        const heroCenterX = heroRect.left + heroRect.width / 2;
-        const heroCenterY = heroRect.top + heroRect.height / 2;
-
+        // 1. Calculate X movement (independent of vertical scroll)
+        const heroCenterX = heroLogoRect.left + heroLogoRect.width / 2;
         const headerCenterX = headerRect.left + headerRect.width / 2;
-
-        // Header's target Y center in the viewport once it reaches the top
-        // (Since the header will snap to fixed top-0)
-        // Note: The header has padding, so we must add the top padding to get the actual logo center!
-        // The header has py-4 (16px) or py-5 (20px). The exact position in the viewport will be headerRect.top + headerRect.height/2.
-        // Wait, since header is currently at top-[100vh], its viewport top is 100vh.
-        // Once it reaches top-0, its viewport top will be 0.
-        // So its final viewport center Y is just its current viewport center Y minus 100vh!
-        // This is mathematically flawless and avoids hardcoding padding.
-        
-        const headerInitialCenterY = headerRect.top + headerRect.height / 2;
-        const headerFinalCenterY = headerInitialCenterY - window.innerHeight;
-
         const moveX = headerCenterX - heroCenterX;
-        
-        // We want the hero logo to end up at headerFinalCenterY in the viewport.
-        // But the hero section itself scrolls UP by window.innerHeight.
-        // So we must move the logo DOWN by window.innerHeight to cancel the scroll,
-        // AND THEN move it to the final destination.
-        const moveY = (headerFinalCenterY - heroCenterY) + window.innerHeight;
 
-        const targetScale = headerRect.width / heroRect.width;
+        // 2. Calculate Y movement robustly using absolute document coordinates
+        // This avoids bugs when user navigates back to Home with a non-zero scroll position
+        const absoluteHeroSectionTop = heroSectionRect.top + window.scrollY;
+        const targetScrollY = absoluteHeroSectionTop + heroSectionRect.height;
+        
+        const headerElRect = header.getBoundingClientRect();
+        const logoOffsetY = headerRect.top - headerElRect.top;
+        const targetViewportCenterY = logoOffsetY + headerRect.height / 2;
+        
+        const targetAbsoluteCenterY = targetScrollY + targetViewportCenterY;
+        const absoluteHeroLogoCenterY = heroLogoRect.top + window.scrollY + heroLogoRect.height / 2;
+        
+        const moveY = targetAbsoluteCenterY - absoluteHeroLogoCenterY;
+
+        const targetScale = headerRect.width / heroLogoRect.width;
 
         console.log("=== INITIAL LOGO MEASUREMENTS ===");
         console.log("Window Info:", {
@@ -138,10 +133,10 @@ export const Hero = () => {
           scrollY: window.scrollY,
         });
         console.log("Hero Logo Rect:", {
-          top: heroRect.top,
-          height: heroRect.height,
-          bottom: heroRect.bottom,
-          width: heroRect.width,
+          top: heroLogoRect.top,
+          height: heroLogoRect.height,
+          bottom: heroLogoRect.bottom,
+          width: heroLogoRect.width,
         });
         console.log("Header Logo Rect:", {
           top: headerRect.top,
@@ -151,15 +146,14 @@ export const Hero = () => {
         });
         console.log("=== CALCULATED MOVEMENT TARGETS ===");
         console.log("heroCenterX: ", heroCenterX);
-        console.log("heroCenterY: ", heroCenterY);
         console.log("headerCenterX: ", headerCenterX);
-        console.log("headerInitialCenterY: ", headerInitialCenterY);
-        console.log("headerFinalCenterY: ", headerFinalCenterY);
+        console.log("targetViewportCenterY: ", targetViewportCenterY);
+        console.log("targetAbsoluteCenterY: ", targetAbsoluteCenterY);
+        console.log("absoluteHeroLogoCenterY: ", absoluteHeroLogoCenterY);
         console.log("moveX (distance to move right): ", moveX);
         console.log("moveY (distance to move down): ", moveY);
         console.log("targetScale (how much to shrink): ", targetScale);
         console.log("===================================");
-        console.log("=================================");
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -189,10 +183,9 @@ export const Hero = () => {
                 targetMoveY: moveY,
                 targetScale: targetScale,
                 heroCenterX,
-                heroCenterY,
                 headerCenterX,
-                headerInitialCenterY,
-                headerFinalCenterY,
+                targetViewportCenterY,
+                targetAbsoluteCenterY,
               });
             }
           },
