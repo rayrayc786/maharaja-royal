@@ -85,11 +85,6 @@ export const RestaurantGallery = () => {
       <div className="rg-gallery" role="region" aria-roledescription="carousel" aria-label="Gallery slides">
         <div className="rg-track">
 
-          {/* Previous (partial) */}
-          <button className="rg-slide rg-slide--side rg-slide--prev" aria-label="Go to previous slide" onClick={goPrev} tabIndex={0}>
-            <img src={slides[prevIndex].image} alt={slides[prevIndex].title} className="rg-slide__img" loading="lazy" />
-          </button>
-
           {/* Active */}
           <div
             key={current}
