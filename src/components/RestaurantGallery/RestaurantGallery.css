@@ -284,6 +284,7 @@
   }
 
   .rg-slide--active {
+    flex: none;
     height: 400px;
     width: 100%;
   }
