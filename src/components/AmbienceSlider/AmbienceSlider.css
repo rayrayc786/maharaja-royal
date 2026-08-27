@@ -30,11 +30,23 @@
 }
 
 .ambience-slider-wrapper .swiper-slide {
-  transition: opacity .5s ease;
+  /* Transition for any slide level changes */
 }
 
-.ambience-slider-wrapper .swiper-slide:not(.swiper-slide-active) {
-  opacity: .5;
+/* Vignette black overlay for non-active slides */
+.ambience-slide-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.15) 30%, rgba(0, 0, 0, 0.85) 100%);
+  opacity: 0;
+  transition: opacity .5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ambience-slider-wrapper .swiper-slide:not(.swiper-slide-active) .ambience-slide-img::after {
+  opacity: 1;
 }
 
 .ambience-slide {
