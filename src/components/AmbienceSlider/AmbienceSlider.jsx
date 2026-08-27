@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 
@@ -39,13 +39,40 @@ const slides = [
 
 export const AmbienceSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const swiperRef = useRef(null);
+  const [swiperInstance, setSwiperInstance] = useState(null);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
   const total = slides.length;
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!swiperInstance) return;
+    if (inView) {
+      swiperInstance.slideToLoop(0, 0);
+      swiperInstance.autoplay.start();
+    } else {
+      swiperInstance.autoplay.stop();
+    }
+  }, [swiperInstance, inView]);
+
   return (
-    <section className="ambience-section" aria-label="Restaurant gallery">
+    <section ref={sectionRef} className="ambience-section" aria-label="Restaurant gallery">
       <div className="ak-height-150 ak-height-lg-60"></div>
-      
+
       <div className="ambience-slider-wrapper">
         <Swiper
           modules={[Navigation, Autoplay]}
@@ -60,8 +87,7 @@ export const AmbienceSlider = () => {
             pauseOnMouseEnter: true,
           }}
           onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-            swiper.slideToLoop(0, 0);
+            setSwiperInstance(swiper);
           }}
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.realIndex);
@@ -83,7 +109,7 @@ export const AmbienceSlider = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        
+
         <div className="container mx-auto px-4">
           <div className="ambience-controls">
             <div className="ambience-title">
@@ -96,25 +122,25 @@ export const AmbienceSlider = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="ambience-nav">
               <button
                 className="ambience-nav-btn"
-                onClick={() => swiperRef.current?.slidePrev()}
+                onClick={() => swiperInstance?.slidePrev()}
                 aria-label="Previous slide"
               >
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5.657 11.657L0 6L5.657 0.343M0 6H17" stroke="currentColor" stroke-width="1.2"></path>
                 </svg>
               </button>
-              
+
               <span className="ambience-nav-counter">
                 {activeIndex + 1} / {total}
               </span>
-              
+
               <button
                 className="ambience-nav-btn"
-                onClick={() => swiperRef.current?.slideNext()}
+                onClick={() => swiperInstance?.slideNext()}
                 aria-label="Next slide"
               >
                 <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
