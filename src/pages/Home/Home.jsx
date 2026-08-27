@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { scrollToSection } from '../../utils/scroll';
 import { Hero } from '../../components/Hero/Hero';
 import { SplitTextReveal } from '../../components/SplitTextReveal/SplitTextReveal';
-import { RestaurantGallery } from '../../components/RestaurantGallery/RestaurantGallery';
+// import { RestaurantGallery } from '../../components/RestaurantGallery/RestaurantGallery';
+import { AmbienceSlider } from '../../components/AmbienceSlider/AmbienceSlider';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -115,7 +116,8 @@ export const Home = ({ onReserve }) => {
       </section> */}
 
       {/* ===== RESTAURANT GALLERY CAROUSEL ===== */}
-      <RestaurantGallery />
+      {/* <RestaurantGallery /> */}
+      <AmbienceSlider />
 
       {/* ===== EDITORIAL MENU SECTIONS ===== */}
       {/* Menu 1: Breakfast (Cream) */}

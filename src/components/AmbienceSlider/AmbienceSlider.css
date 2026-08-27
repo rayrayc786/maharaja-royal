@@ -1,0 +1,183 @@
+/* ================================================================
+   AmbienceSlider — Swiper-based cinematic horizontal carousel
+   Clean transitions, slide loop, responsive image dimensions
+   ================================================================ */
+
+.ambience-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #F4F0E8; /* Maharaja brand cream background */
+}
+
+/* Spacer utilities to match project structure */
+.ak-height-150 {
+  height: 150px;
+}
+
+@media screen and (max-width: 992px) {
+  .ak-height-lg-60 {
+    height: 60px;
+  }
+}
+
+.ambience-slider-wrapper {
+  width: 100%;
+}
+
+.ambience-slider-wrapper .swiper {
+  overflow: visible;
+  padding-left: 5%;
+}
+
+.ambience-slider-wrapper .swiper-slide {
+  transition: opacity .5s ease;
+}
+
+.ambience-slider-wrapper .swiper-slide:not(.swiper-slide-active) {
+  opacity: .5;
+}
+
+.ambience-slide {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambience-slide-img {
+  position: relative;
+  width: 100%;
+  height: 650px; /* User requested height of 650px */
+  overflow: hidden;
+  border-radius: 8px; /* Maharaja brand style border radius */
+}
+
+.ambience-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s ease;
+}
+
+.ambience-slide-img:hover img {
+  transform: scale(1.03);
+}
+
+.ambience-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  padding-bottom: 10px;
+}
+
+.ambience-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ambience-title-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ambience-title-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #0A1930; /* Maharaja royal-blue */
+  margin: 0;
+  white-space: nowrap;
+}
+
+.ambience-subtitle-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #1D1D1B; /* Maharaja text-dark */
+  margin: 0;
+  opacity: .75;
+  letter-spacing: .5px;
+}
+
+.ambience-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ambience-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0A1930; /* Maharaja royal-blue */
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .3s ease, transform .3s ease;
+  opacity: .7;
+}
+
+.ambience-nav-btn:hover {
+  color: #D4AF37; /* Maharaja gold */
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.ambience-nav-counter {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #0A1930;
+  opacity: .7;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* ================================================================
+   Responsive Breakpoints / Media Queries
+   ================================================================ */
+
+@media screen and (max-width: 1200px) {
+  .ambience-slide-img {
+    height: 480px; /* Scaled down for tablet/landscape */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .ambience-slide-img {
+    height: 380px; /* Scaled down for smaller tablet */
+  }
+  .ambience-slider-wrapper .swiper {
+    padding-left: 4%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .ambience-slide-img {
+    height: 280px; /* Scaled down for mobile */
+  }
+  .ambience-controls {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  .ambience-nav {
+    width: 100%;
+    justify-content: center;
+  }
+  .ambience-title-text {
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    white-space: normal;
+  }
+  .ambience-slider-wrapper .swiper {
+    padding-left: 3%;
+  }
+}
