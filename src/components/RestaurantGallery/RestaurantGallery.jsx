@@ -9,25 +9,25 @@ import galleryImg4 from '../../assets/1000758996.png';
 const slides = [
   {
     id: 1,
-    image: galleryImg1,
+    image: galleryImg4,
     title: 'FRESH FLAVORS. GREAT COMPANY',
     description: 'Authentic Indian cuisine and a welcoming space for friends and family',
   },
   {
     id: 2,
-    image: galleryImg2,
+    image: galleryImg1,
     title: 'VIBRANT DINING ATMOSPHERE',
     description: 'Modern interiors, warm lighting, and the perfect setting to relax and enjoy',
   },
   {
     id: 3,
-    image: galleryImg3,
+    image: galleryImg2,
     title: 'A ROYAL CULINARY EXPERIENCE',
     description: 'Every dish is crafted with devotion — a celebration of Indian royal heritage',
   },
   {
     id: 4,
-    image: galleryImg4,
+    image: galleryImg3,
     title: 'A ROYAL CULINARY EXPERIENCE',
     description: 'Every dish is crafted with devotion — a celebration of Indian royal heritage',
   },
