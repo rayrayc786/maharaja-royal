@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { scrollToSection } from '../../utils/scroll';
 import { Hero } from '../../components/Hero/Hero';
 import { SplitTextReveal } from '../../components/SplitTextReveal/SplitTextReveal';
+import { RestaurantGallery } from '../../components/RestaurantGallery/RestaurantGallery';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -84,8 +85,7 @@ export const Home = ({ onReserve }) => {
       </section>
 
       {/* ===== BANNER SECTION ===== */}
-      <section className="relative bg-royal-gradient py-32 px-6 md:py-48 md:px-12 lg:py-[180px] lg:px-24 text-cream flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Repeating Mandala Texture — banner section only */}
+      {/* <section className="relative bg-royal-gradient py-32 px-6 md:py-48 md:px-12 lg:py-[180px] lg:px-24 text-cream flex flex-col items-center justify-center text-center overflow-hidden">
         <div 
           className="absolute inset-0 pointer-events-none z-[1]"
           style={{
@@ -106,14 +106,16 @@ export const Home = ({ onReserve }) => {
           </button>
         </div>
         
-        {/* Subtle decorative dishes - styled like Novikov's floating elements */}
         <div className="absolute -top-[10%] -left-[5%] w-[300px] h-[300px] rounded-full overflow-hidden border-[6px] border-cream/20 gsap-parallax hidden lg:block z-20">
            <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover scale-110" alt="Decor 1"/>
         </div>
         <div className="absolute -bottom-[10%] -right-[5%] w-[350px] h-[350px] rounded-full overflow-hidden border-[6px] border-cream/20 gsap-parallax hidden lg:block z-20">
            <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover scale-110" alt="Decor 2"/>
         </div>
-      </section>
+      </section> */}
+
+      {/* ===== RESTAURANT GALLERY CAROUSEL ===== */}
+      <RestaurantGallery />
 
       {/* ===== EDITORIAL MENU SECTIONS ===== */}
       {/* Menu 1: Breakfast (Cream) */}

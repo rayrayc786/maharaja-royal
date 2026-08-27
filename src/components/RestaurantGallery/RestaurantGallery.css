@@ -1,0 +1,246 @@
+/* ================================================================
+   RestaurantGallery — cinematic horizontal carousel
+   Dark navy background, oversized center image, partial side previews
+   ================================================================ */
+
+.rg-section {
+  background: linear-gradient(135deg, #0b132a 0%, #153b9e 50%, #0c1a45 100%);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Gallery Viewport ── */
+.rg-gallery {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Track ── */
+.rg-track {
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  margin-left: -120px;
+  margin-right: -120px;
+}
+
+/* ── Base slide ── */
+.rg-slide {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: block;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.rg-slide__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+/* ── Active (center) slide ── */
+.rg-slide--active {
+  flex: 1 1 0;
+  height: 500px;
+  cursor: default;
+  animation: simpleFadeIn 0.5s ease both;
+}
+
+@keyframes simpleFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Side (partial) slides ── */
+.rg-slide--side {
+  width: 220px;
+  height: 500px;
+  flex-shrink: 0;
+}
+
+.rg-slide--side .rg-slide__img {
+  filter: brightness(0.4) saturate(0.7);
+  transform: scale(1.04);
+}
+
+.rg-slide--side:hover .rg-slide__img {
+  filter: brightness(0.65) saturate(1);
+  transform: scale(1.08);
+}
+
+/* Edge fade on side slides */
+.rg-slide--prev::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(11,19,42,0.65) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+.rg-slide--next::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(11,19,42,0.65) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Bottom bar ── */
+.rg-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 36px 24px 36px;
+  background: linear-gradient(135deg, #0b132a 0%, #153b9e 50%, #0c1a45 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  gap: 24px;
+}
+
+.rg-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rg-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D4AF37;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.rg-description {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  color: rgba(233, 226, 214, 0.65);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Navigation ── */
+.rg-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Premium circular arrow buttons ── */
+.rg-nav__prev,
+.rg-nav__next {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(212, 175, 55, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  will-change: transform;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.rg-nav__prev svg,
+.rg-nav__next svg {
+  width: 16px;
+  height: 16px;
+  stroke: rgba(212, 175, 55, 0.75);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  position: relative;
+  z-index: 2;
+  transition: stroke 0.3s ease, transform 0.3s ease;
+}
+
+.rg-nav__prev::before,
+.rg-nav__next::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.3) 0%, transparent 72%);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 1;
+}
+
+.rg-nav__prev:hover,
+.rg-nav__next:hover {
+  border-color: rgba(212, 175, 55, 0.85);
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.18), 0 0 20px rgba(212, 175, 55, 0.22);
+  transform: scale(1.1);
+}
+
+.rg-nav__prev:hover::before,
+.rg-nav__next:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.rg-nav__prev:hover svg { stroke: #D4AF37; transform: translateX(-2px); }
+.rg-nav__next:hover svg { stroke: #D4AF37; transform: translateX(2px); }
+
+.rg-nav__prev:active,
+.rg-nav__next:active {
+  transform: scale(0.93);
+  box-shadow: none;
+}
+
+.rg-nav__counter {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(212, 175, 55, 0.65);
+  letter-spacing: 0.12em;
+  min-width: 44px;
+  text-align: center;
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .rg-track { margin-left: -80px; margin-right: -80px; gap: 4px; }
+  .rg-slide--active { height: 360px; }
+  .rg-slide--side { width: 140px; height: 360px; }
+  .rg-bottom { padding: 18px 28px 20px 28px; }
+  .rg-eyebrow { font-size: 0.95rem; }
+  .rg-description { font-size: 0.875rem; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .rg-track { margin-left: 0; margin-right: 0; flex-direction: column; gap: 0; }
+  .rg-slide--side { display: none; }
+  .rg-slide--active { height: 320px; width: 100%; }
+  .rg-bottom { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 20px 24px; }
+  .rg-nav { align-self: flex-end; }
+  .rg-eyebrow { font-size: 0.875rem; letter-spacing: 0.09em; }
+  .rg-description { font-size: 0.85rem; }
+  .rg-nav__prev, .rg-nav__next { width: 42px; height: 42px; }
+}

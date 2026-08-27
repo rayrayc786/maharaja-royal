@@ -33,8 +33,8 @@ export const PageLoader = ({ onComplete }) => {
     <div className="fixed inset-0 z-[9999] bg-royal-gradient flex items-center justify-center" ref={loaderRef}>
       <div className="text-center text-cream">
         <h1 className="heading-large mb-8 md:mb-16" ref={logoRef}>
-          <span className="text-gold">MAHARAJA</span><br/>
-          <span className="text-[0.4em]">ROYAL BITES</span>
+          <span className="text-gold">MAHARAJA ROYAL BITES</span><br/>
+          {/* <span className="text-[0.4em]">ROYAL BITES</span> */}
         </h1>
         <div className="flex flex-col items-center gap-4" ref={textRef}>
           <span className="text-micro">RENO • ROYAL INDIAN CUISINE</span>

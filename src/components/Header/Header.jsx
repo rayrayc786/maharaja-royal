@@ -60,9 +60,9 @@ export const Header = ({ onReserve }) => {
   let headerClasses = `
     w-full
     z-[200]
-    py-4
+    py-2
     px-6
-    md:py-5
+    md:py-3
     md:px-12
     lg:px-24
     border-b

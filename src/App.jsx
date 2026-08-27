@@ -28,29 +28,29 @@ function App() {
       <ScrollToTop />
       <CustomCursor />
       
-      {loading ? (
-        <PageLoader onComplete={() => setLoading(false)} />
-      ) : (
-        <div className="app-content" style={{ opacity: 0, animation: 'fadeIn 1s forwards' }}>
-          <Header onReserve={() => setIsModalOpen(true)} />
-          
-          <main>
-            <Routes>
-              <Route path="/" element={<Home onReserve={() => setIsModalOpen(true)} />} />
-              <Route path="/menus" element={<Menus />} />
-              <Route path="/desserts" element={<DessertBoutique />} />
-              <Route path="/our-story" element={<OurStory />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/gallery-1" element={<GalleryBlue />} />
-            </Routes>
-          </main>
+      {/* Site content renders at full opacity — loader covers it via position:fixed */}
+      <div className="app-content">
+        <Header onReserve={() => setIsModalOpen(true)} />
+        
+        <main>
+          <Routes>
+            <Route path="/" element={<Home onReserve={() => setIsModalOpen(true)} />} />
+            <Route path="/menus" element={<Menus />} />
+            <Route path="/desserts" element={<DessertBoutique />} />
+            <Route path="/our-story" element={<OurStory />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery-1" element={<GalleryBlue />} />
+          </Routes>
+        </main>
 
-          <Footer />
-          <ReservationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-        </div>
-      )}
+        <Footer />
+        <ReservationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </div>
+
+      {/* Loader overlays the content via fixed positioning (z-[9999]) */}
+      {loading && <PageLoader onComplete={() => setLoading(false)} />}
       
       <style>{`
         @keyframes fadeIn {
