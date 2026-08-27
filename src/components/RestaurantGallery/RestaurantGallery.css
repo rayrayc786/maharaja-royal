@@ -52,16 +52,19 @@
   flex: 1 1 0;
   height: 650px;
   cursor: default;
-  animation: simpleFadeIn 0.5s ease both;
 }
 
-@keyframes simpleFadeIn {
+.rg-slide--active .rg-slide__img {
+  animation: slideInRightToLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideInRightToLeft {
   from {
-    opacity: 0;
+    transform: scale(1.08) translateX(4%);
   }
 
   to {
-    opacity: 1;
+    transform: scale(1) translateX(0);
   }
 }
 

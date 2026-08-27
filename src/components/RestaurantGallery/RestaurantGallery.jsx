@@ -44,6 +44,14 @@ export const RestaurantGallery = () => {
 
   useEffect(() => { currentRef.current = current; }, [current]);
 
+  // Preload all gallery images on mount to avoid white flashes during transitions
+  useEffect(() => {
+    slides.forEach((slide) => {
+      const img = new Image();
+      img.src = slide.image;
+    });
+  }, []);
+
   const goTo = useCallback((index) => {
     if (transitioning.current) return;
     transitioning.current = true;
@@ -55,10 +63,10 @@ export const RestaurantGallery = () => {
   const goPrev = useCallback(() => goTo(currentRef.current - 1), [goTo]);
   const goNext = useCallback(() => goTo(currentRef.current + 1), [goTo]);
 
-  // Auto-advance every 5 s — pause on hover
+  // Auto-advance every 3 s — pause on hover
   useEffect(() => {
     if (hovered) { clearInterval(autoRef.current); return; }
-    autoRef.current = setInterval(() => goTo(currentRef.current + 1), 5000);
+    autoRef.current = setInterval(() => goTo(currentRef.current + 1), 3000);
     return () => clearInterval(autoRef.current);
   }, [hovered, goTo]);
 
